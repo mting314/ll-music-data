@@ -17,4 +17,8 @@ Each entity is its own file (fetched at runtime by the app), à la [sekai-viewer
 
 Served at `https://mting314.github.io/ll-music-data/<file>.json`.
 
-**Refresh:** [`refresh.yml`](.github/workflows/refresh.yml) runs daily (04:00 UTC), pulls the latest dataset from the Cloud Run data API, splits it into the files above, and commits — using the built-in `GITHUB_TOKEN` (no secrets). The data originates from the scrapers → Firestore pipeline in the main repo; this repo is the CDN read path.
+**Refresh:** these files are committed by the daily **Cloud Run job** in the main
+repo (`pipeline/`), which scrapes the catalog, builds the dataset, and pushes the
+per-entity JSON here (via a GitHub token). There is no database and no data API —
+this repo is the single source the frontend reads. See `pipeline/README.md` in the
+main repo.
